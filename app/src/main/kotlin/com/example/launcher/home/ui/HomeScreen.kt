@@ -10,6 +10,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.example.launcher.clock.ClockStateProducer
 import com.example.launcher.clock.ui.PixelClock
+import com.example.launcher.core.theme.ColorTokens
 import com.example.launcher.home.presentation.HomeUiState
 import com.example.launcher.widgets.ui.WidgetHostArea
 
@@ -28,7 +29,7 @@ fun HomeScreen(
         PixelClock(text = clockText)
         WidgetHostArea()
         uiState.homeGridApps.forEach { app ->
-            Text(text = app.label)
+            Text(text = app.label, color = ColorTokens.Text)
         }
     }
 }
