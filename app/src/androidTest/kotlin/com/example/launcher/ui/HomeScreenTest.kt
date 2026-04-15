@@ -17,6 +17,12 @@ class HomeScreenTest {
 
     @Test
     fun launcherRoot_isDisplayed() {
-        composeTestRule.onNodeWithTag("launcher_root").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("home_screen").assertIsDisplayed()
+    }
+
+    @Test
+    fun home_showsClockAndWidgetArea() {
+        composeTestRule.onNodeWithTag("pixel_clock").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("widget_host_area").assertIsDisplayed()
     }
 }
