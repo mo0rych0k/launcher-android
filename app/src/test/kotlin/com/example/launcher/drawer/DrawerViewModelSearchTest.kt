@@ -11,8 +11,8 @@ class DrawerViewModelSearchTest {
     fun query_filtersAppsCaseInsensitive() {
         val vm = DrawerViewModel(
             allApps = listOf(
-                LauncherAppInfo("Clock", "clock.pkg", "Main", Intent()),
-                LauncherAppInfo("Calendar", "calendar.pkg", "Main", Intent())
+                LauncherAppInfo("Clock", "clock.pkg", "Main", Intent(), null),
+                LauncherAppInfo("Calendar", "calendar.pkg", "Main", Intent(), null)
             )
         )
 
