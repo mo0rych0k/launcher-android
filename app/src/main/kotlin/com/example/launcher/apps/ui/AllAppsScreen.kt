@@ -1,6 +1,9 @@
 package com.example.launcher.apps.ui
 
+import android.content.Intent
 import android.widget.ImageView
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,13 +24,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.example.launcher.apps.domain.LauncherAppInfo
 import com.example.launcher.home.presentation.HomeUiState
 
 @Composable
 fun AllAppsScreen(
+    modifier: Modifier = Modifier,
     uiState: HomeUiState,
     onQueryChange: (String) -> Unit,
-    modifier: Modifier = Modifier
+    onAppClick: (LauncherAppInfo) -> Unit,
 ) {
     val normalizedQuery = uiState.searchQuery.trim()
     val filteredApps = remember(uiState.allApps, normalizedQuery) {
@@ -63,9 +69,14 @@ fun AllAppsScreen(
             ) {
                 items(filteredApps, key = { it.packageName }) { app ->
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = rememberRipple(),
+                            ) { onAppClick.invoke(app) },
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
                     ) {
                         val context = LocalContext.current
                         AndroidView(

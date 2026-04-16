@@ -39,11 +39,19 @@ class LauncherActivity : ComponentActivity() {
             LauncherTheme {
                 HorizontalPager(state = pagerState) { page ->
                     if (page == 0) {
-                        HomeScreen(uiState = uiState)
+                        HomeScreen(
+                            uiState = uiState,
+                            onAppClick = { app ->
+                                startActivity(app.launchIntent)
+                            }
+                        )
                     } else {
                         AllAppsScreen(
                             uiState = uiState,
-                            onQueryChange = viewModel::onSearchQueryChange
+                            onQueryChange = viewModel::onSearchQueryChange,
+                            onAppClick = { app ->
+                                startActivity(app.launchIntent)
+                            }
                         )
                     }
                 }
