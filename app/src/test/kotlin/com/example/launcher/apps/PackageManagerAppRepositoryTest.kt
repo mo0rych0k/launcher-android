@@ -12,9 +12,9 @@ class PackageManagerAppRepositoryTest {
     fun returnsOnlyLaunchableApps_sortedByLabel() = runTest {
         val fakeSource = FakeInstalledAppsSource(
             listOf(
-                LauncherAppInfo("Zeta", "z.pkg", "Main", android.content.Intent(), null),
-                LauncherAppInfo("Alpha", "a.pkg", "Main", android.content.Intent(), null),
-                LauncherAppInfo("Hidden", "h.pkg", "Main", null, null)
+                LauncherAppInfo("Zeta", "z.pkg", "Main", android.content.Intent()),
+                LauncherAppInfo("Alpha", "a.pkg", "Main", android.content.Intent()),
+                LauncherAppInfo("Hidden", "h.pkg", "Main", null)
             )
         )
         val repo = PackageManagerAppRepository(fakeSource)

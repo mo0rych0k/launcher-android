@@ -18,13 +18,11 @@ class AndroidInstalledAppsSource(
             val packageName = info.activityInfo.packageName
             val activityName = info.activityInfo.name
             val launchIntent = packageManager.getLaunchIntentForPackage(packageName)
-            val icon = info.loadIcon(packageManager)
             LauncherAppInfo(
                 label = label,
                 packageName = packageName,
                 activityName = activityName,
-                launchIntent = launchIntent,
-                icon = icon
+                launchIntent = launchIntent
             )
         }
     }

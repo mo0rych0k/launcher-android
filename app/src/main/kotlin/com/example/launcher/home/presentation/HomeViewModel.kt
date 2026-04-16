@@ -12,9 +12,7 @@ import kotlinx.coroutines.launch
 
 data class HomeUiState(
     val homeGridApps: List<LauncherAppInfo> = emptyList(),
-    val dockApps: List<LauncherAppInfo> = emptyList(),
-    val allApps: List<LauncherAppInfo> = emptyList(),
-    val searchQuery: String = ""
+    val dockApps: List<LauncherAppInfo> = emptyList()
 )
 
 class HomeViewModel(
@@ -28,15 +26,7 @@ class HomeViewModel(
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     fun load() = viewModelScope.launch {
-        val apps = appRepository.getLaunchableApps().sortedBy { it.label.lowercase() }
-        _uiState.value = _uiState.value.copy(
-            homeGridApps = apps.take(20),
-            allApps = apps
-        )
-    }
-
-    fun onSearchQueryChange(query: String) {
-        _uiState.value = _uiState.value.copy(searchQuery = query)
+        _uiState.value = HomeUiState(homeGridApps = appRepository.getLaunchableApps().take(20))
     }
 
     suspend fun pinToDock(app: LauncherAppInfo) {
