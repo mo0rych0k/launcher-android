@@ -14,7 +14,7 @@ class AndroidInstalledAppsSource(
         val resolveInfos = packageManager.queryIntentActivities(queryIntent, 0)
 
         resolveInfos.map { info ->
-            val label = info.loadLabel(packageManager)?.toString().orEmpty()
+            val label = info.loadLabel(packageManager).toString()
             val packageName = info.activityInfo.packageName
             val activityName = info.activityInfo.name
             val launchIntent = packageManager.getLaunchIntentForPackage(packageName)

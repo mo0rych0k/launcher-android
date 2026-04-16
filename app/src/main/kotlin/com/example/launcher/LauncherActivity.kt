@@ -1,6 +1,8 @@
 package com.example.launcher
 
+import android.content.ActivityNotFoundException
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.LaunchedEffect
@@ -29,7 +31,21 @@ class LauncherActivity : ComponentActivity() {
                 viewModel.load()
             }
             LauncherTheme {
-                HomeScreen(uiState = uiState)
+                HomeScreen(
+                    uiState = uiState,
+                    onAppClick = { app ->
+                        val launchIntent = app.launchIntent
+                        if (launchIntent == null) {
+                            Toast.makeText(this, "App can't be launched", Toast.LENGTH_SHORT).show()
+                        } else {
+                            try {
+                                startActivity(launchIntent)
+                            } catch (_: ActivityNotFoundException) {
+                                Toast.makeText(this, "App not found", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                )
             }
         }
     }
