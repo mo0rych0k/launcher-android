@@ -7,6 +7,6 @@ data class LauncherAppInfo(
     val label: String,
     val packageName: String,
     val activityName: String,
-    val launchIntent: Intent?,
-    val icon: Drawable?
+    val launchIntent: Intent,
+    val icon: Drawable
 )
